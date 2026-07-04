@@ -4,20 +4,26 @@ import Summary from './Summary';
 import { useBundle } from '../../context/BundleContext';
 
 export default function ReviewPanel() {
-  const { groupedReviewItems, totals, setQty, saveSystem, saved, checkedOut, setCheckedOut } = useBundle();
+  const {
+    groupedReviewItems,
+    totals,
+    setQty,
+    saveSystem,
+    saved,
+    checkedOut,
+    setCheckedOut,
+    icons
+  } = useBundle();
 
-  // "Plan" and "Shipping" are two categories in the data, but the design
-  // shows them under a single "PLAN" header. Merge them here for display
-  // only — the underlying grouping/data is untouched.
   const displayGroups = useMemo(() => {
     const order = [];
     const map = new Map();
 
     groupedReviewItems.forEach((group) => {
-      const label =
-        group.category === 'Plan' || group.category === 'Shipping'
-          ? 'Plan'
-          : group.category;
+      // Map category labels accurately to match design headers
+      let label = group.category;
+      if (group.category === 'Plan') label = 'HOME MONITORING PLAN';
+      if (group.category === 'Shipping') label = 'SHIPPING'; // Kept in same block area if needed, or mapped cleanly
 
       if (!map.has(label)) {
         map.set(label, []);
@@ -26,33 +32,54 @@ export default function ReviewPanel() {
       map.get(label).push(...group.lines);
     });
 
-    return order.map((label) => ({ category: label, lines: map.get(label) }));
+    return order.map((label) => ({
+      category: label,
+      lines: map.get(label),
+    }));
   }, [groupedReviewItems]);
 
   return (
-    <aside className="overflow-hidden rounded-none bg-[#edf4ff] px-[52px] py-[34px] max-[980px]:px-6 max-[980px]:py-6 max-[640px]:px-4 max-[640px]:py-6" aria-label="Your security system">
-      <div className="block p-0 text-[#242535]">
-        <p className="m-0 mb-[6px] text-[10px] font-black uppercase leading-none tracking-normal text-[#b8c1d1]">Review</p>
-        <div>
-          <h2 className="m-0 text-[24px] font-black leading-[1.05]">Your security system</h2>
-          <p className="mb-[22px] mt-[7px] w-[420px] max-w-full text-[11px] leading-[1.25] text-[#5d6474]">Review your personalized protection system designed to keep what matters most safe.</p>
-        </div>
+    <aside
+      className="overflow-hidden bg-[#edf4ff] px-6 py-8 md:px-[52px] md:py-[40px] w-full"
+      aria-label="Your security system"
+    >
+      <div className="text-[#242535] max-w-[480px]">
+        <p className="mb-[6px] text-[10px] font-black uppercase tracking-[1px] text-[#b8c1d1] max-[640px]:block">
+          Review
+        </p>
+        <h2 className="text-[24px] font-black leading-[1.05] tracking-tight text-[#171820]">
+          Your security system
+        </h2>
+        <p className="mt-[7px] mb-[28px] text-[11px] leading-[1.35] text-[#5d6474]">
+          Review your personalized protection system designed to keep what matters most safe.
+        </p>
       </div>
 
-      <div className="grid grid-cols-[1fr_430px] items-start gap-[46px] max-[980px]:grid-cols-1 max-[980px]:gap-6">
-        <div className="grid gap-2">
+      {/* Main layout container splitting list and metrics */}
+      <div className="grid gap-[40px] lg:grid-cols-[1fr_420px] items-start">
+        {/* Left Area: Line Items */}
+        <div className="flex flex-col gap-5">
           {displayGroups.map((group) => (
-            <ReviewCategory key={group.category} category={group.category} lines={group.lines} setQty={setQty} />
+            <ReviewCategory
+              key={group.category}
+              category={group.category}
+              lines={group.lines}
+              setQty={setQty}
+            />
           ))}
         </div>
 
-        <Summary
-          totals={totals}
-          checkedOut={checkedOut}
-          onCheckout={() => setCheckedOut(true)}
-          onSave={saveSystem}
-          saved={saved}
-        />
+        {/* Right Area: Checkout Action Card Summary */}
+        <div className="w-full">
+          <Summary
+            totals={totals}
+            checkedOut={checkedOut}
+            onCheckout={() => setCheckedOut(true)}
+            onSave={saveSystem}
+            saved={saved}
+            icons={icons}
+          />
+        </div>
       </div>
     </aside>
   );

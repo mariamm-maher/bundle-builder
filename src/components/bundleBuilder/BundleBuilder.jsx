@@ -8,7 +8,7 @@ export default function BundleBuilder() {
   const { catalog, selectedCountForStep, activeVariants, setActiveVariants, onVariantChange, quantities, setQty, getActiveKey, icons } = useBundle();
   console.log("selectedcountForStep", selectedCountForStep);
   return (
-    <section aria-label="Bundle builder" className="min-w-0">
+    <section aria-label="Bundle builder" className="min-w-0 ">
       <h1 className="hidden text-center text-[38px] font-black leading-none text-[#171820] max-[640px]:mx-[18px] max-[640px]:mt-[16px] max-[640px]:mb-[36px] max-[640px]:block">
         Let's get started!
       </h1>
