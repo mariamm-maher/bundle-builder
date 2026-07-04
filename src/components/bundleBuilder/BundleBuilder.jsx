@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { steps } from '../utils/builder';
+import { steps } from '../../utils/builder';
 import StepPanel from './StepPanel';
-import { useBundle } from '../context/BundleContext';
+import { useBundle } from '../../context/BundleContext';
 
 export default function BundleBuilder() {
   const [openStep, setOpenStep] = useState('cameras');
   const { catalog, selectedCountForStep, activeVariants, setActiveVariants, onVariantChange, quantities, setQty, getActiveKey, icons } = useBundle();
-
+  console.log("selectedcountForStep", selectedCountForStep);
   return (
     <section aria-label="Bundle builder" className="min-w-0">
       <h1 className="hidden text-center text-[38px] font-black leading-none text-[#171820] max-[640px]:mx-[18px] max-[640px]:mt-[16px] max-[640px]:mb-[36px] max-[640px]:block">

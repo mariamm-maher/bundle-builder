@@ -1,6 +1,6 @@
 import { BundleProvider } from './context/BundleContext';
-import BundleBuilder from './components/BundleBuilder';
-import ReviewPanel from './components/ReviewPanel';
+import BundleBuilder from './components/BundleBuilder/BundleBuilder';
+import ReviewPanel from './components/ReviewPanel/ReviewPanel';
 
 export default function App() {
   return (
@@ -10,5 +10,6 @@ export default function App() {
         <ReviewPanel />
       </main>
     </BundleProvider>
+  
   );
 }

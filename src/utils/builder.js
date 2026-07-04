@@ -1,5 +1,16 @@
-import { ChevronDown, ChevronUp, Grip, Minus, Plus, Radar, Save, Shield, ShieldCheck, Webcam } from 'lucide-react';
+import {
+  Minus,
+  Plus,
+  Save,
+  ShieldCheck,
+} from 'lucide-react';
 
+import WebcamAlt from '../assets/icons/webcam-alt-1-svgrepo-com.svg';
+import ShieldMinimalistic from '../assets/icons/shield-minimalistic-svgrepo-com.svg';
+import SensorIcon from '../assets/icons/sensor-svgrepo-com.svg';
+import KeypadIcon from '../assets/icons/keypad-svgrepo-com.svg';
+import ChevronDown from '../assets/icons/down.svg';
+import ChevronUp from '../assets/icons/up.svg';
 export const currency = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -8,10 +19,30 @@ export const currency = new Intl.NumberFormat('en-US', {
 });
 
 export const steps = [
-  { id: 'cameras', order: 1, title: 'Choose your cameras', icon: Webcam },
-  { id: 'plan', order: 2, title: 'Choose your plan', icon: Shield },
-  { id: 'sensors', order: 3, title: 'Choose your sensors', icon: Radar },
-  { id: 'protection', order: 4, title: 'Add extra protection', icon: Grip },
+  {
+    id: 'cameras',
+    order: 1,
+    title: 'Choose your cameras',
+    icon: WebcamAlt,
+  },
+  {
+    id: 'plan',
+    order: 2,
+    title: 'Choose your plan',
+    icon: ShieldMinimalistic,
+  },
+  {
+    id: 'sensors',
+    order: 3,
+    title: 'Choose your sensors',
+    icon: SensorIcon,
+  },
+  {
+    id: 'protection',
+    order: 4,
+    title: 'Add extra protection',
+    icon: KeypadIcon,
+  },
 ];
 
 export const icons = {

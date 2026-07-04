@@ -83,14 +83,20 @@ export function BundleProvider({ children }) {
     setQuantities((current) => ({ ...current, [key]: Math.max(0, value) }));
   }
 
-  function saveSystem() {
-    localStorage.setItem(storageKey, JSON.stringify({ 
+ function saveSystem() {
+  console.log("Saving...");
+  console.log(activeVariants);
+  console.log(quantities);
+
+  localStorage.setItem(
+    storageKey,
+    JSON.stringify({
       version: storageVersion,
-      activeVariants, 
-      quantities 
-    }));
-    setSaved(true);
-  }
+      activeVariants,
+      quantities,
+    })
+  );
+}
 
   function selectedCountForStep(stepId) {
     return new Set(selectedLines.filter((line) => line.product.stepId === stepId).map((line) => line.product.id)).size;

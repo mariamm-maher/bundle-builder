@@ -1,8 +1,8 @@
-import { cx } from '../utils/builder';
+import { cx } from '../../utils/builder';
 
 export default function StepHeader({ step, isOpen, selectedCount, onToggle, icons }) {
   const Icon = step.icon;
-
+console.log("selectedCount", selectedCount);
   return (
     <button
       className={cx(
@@ -13,9 +13,13 @@ export default function StepHeader({ step, isOpen, selectedCount, onToggle, icon
       onClick={onToggle}
       aria-expanded={isOpen}
     >
-      <span className={cx('grid h-6 w-6 place-items-center text-[#a3acbb]', 'max-[640px]:h-[26px] max-[640px]:w-[26px] max-[640px]:text-[#8e98a5]')}>
-        <Icon size={22} className="max-[640px]:h-[25px] max-[640px]:w-[25px]" />
-      </span>
+      <span className="grid h-6 w-6 place-items-center">
+  <img
+    src={step.icon}
+    alt=""
+    className="h-[22px] w-[22px] object-contain max-[640px]:h-[25px] max-[640px]:w-[25px]"
+  />
+</span>
       <span className={cx('grid gap-0.5 min-w-0', 'max-[640px]:block')}>
       <span className="block text-[22px] font-black leading-[1.05] text-[#242535] max-[640px]:text-[23px] max-[640px]:font-black max-[640px]:text-[#171820]">
     {step.title}
@@ -25,8 +29,19 @@ export default function StepHeader({ step, isOpen, selectedCount, onToggle, icon
         <span className={cx(!isOpen && 'hidden', 'max-[640px]:inline')}>
           {selectedCount} selected
         </span>
-        {isOpen ? <icons.ChevronUp size={20} className="max-[640px]:h-[17px] max-[640px]:w-[17px]" /> : <icons.ChevronDown size={20} className="max-[640px]:h-[17px] max-[640px]:w-[17px]" />}
-      </span>
+     {isOpen ? (
+  <img
+    src={icons.ChevronUp}
+    alt="Collapse"
+    className="h-[18px] w-[18px] object-contain max-[640px]:h-[17px] max-[640px]:w-[17px]"
+  />
+) : (
+  <img
+    src={icons.ChevronDown}
+    alt="Expand"
+    className="h-[18px] w-[18px] object-contain max-[640px]:h-[17px] max-[640px]:w-[17px]"
+  />
+)} </span>
     </button>
   );
 }
