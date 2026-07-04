@@ -1,6 +1,6 @@
 import Stepper from '../Stepper';
 import { currency } from '../../utils/builder';
-
+import { cx } from '../../utils/builder';
 export default function ReviewItem({ line, setQty }) {
   const isPlanOrShipping = line.product.category === 'Plan' || line.product.category === 'Shipping';
 
